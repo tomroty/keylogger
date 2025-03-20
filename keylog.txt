@@ -1,1 +1,0 @@
-/ key[backspace][backspace][backspace][backspace]keylog[ctrl]s[backspace][backspace][backspace]

